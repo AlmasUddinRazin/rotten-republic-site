@@ -1,0 +1,19 @@
+{
+  "tournaments": [
+    {
+      "id": "TRR-2026-001",
+      "name": "Honor of Kings Season 3",
+      "status": "Ongoing",
+      "date": "2026-08-15"
+    }
+  ],
+  "invoices": [
+    {
+      "invoiceNumber": "TRR-INV-001",
+      "date": "2026-08-13",
+      "recipient": "Team Name",
+      "description": "Prize Pool Distribution",
+      "amount": 5000
+    }
+  ]
+}
