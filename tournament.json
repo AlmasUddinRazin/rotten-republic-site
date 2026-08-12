@@ -1,0 +1,18 @@
+{
+  "tournament": [
+    {
+      "id": "trr-hok-scrim-s1",
+      "name": "Monthly Community Scrim — Season 1",
+      "game": "Honor of Kings",
+      "status": "finished",
+      "startDate": "2026-06-01",
+      "endDate": "2026-06-14",
+      "format": "Single Elimination",
+      "teams": "16",
+      "prizePool": "In-game tokens + cash bonus",
+      "description": "The Rotten Republic's first community scrim, presented in partnership with HOK Global eSports.",
+      "resultsSummary": "",
+      "registrationLink": ""
+    }
+  ]
+}
