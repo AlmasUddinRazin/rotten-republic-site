@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tournament Editor — The Rotten Republic</title>
+<link rel="icon" href="assets/img/logo.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="The Rotten Republic crest">
+      <span class="brand-text"><b>The Rotten Republic</b><span>Community Esports HQ</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="tournaments.html" class="active">Tournaments</a>
+      <a href="invoice.html">Invoices</a>
+    </div>
+  </nav>
+</header>
+
+<section class="section" style="padding-top:56px; border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">No-code editor</div>
+      <h2>Tournament Board Editor</h2>
+      <p style="max-width:70ch;">This page is <b style="color:#fff;">not published on the live board</b> — it's your working desk. Add or edit tournaments below, then hit <b style="color:#fff;">Export</b> to download an updated <span class="mono">tournaments.json</span>. Drag that file into <span class="mono">assets/data/</span> on GitHub (overwriting the old one) and the live board updates — no code editing required.</p>
+    </div>
+
+    <div class="panel sm" style="margin-bottom:34px; display:flex; gap:12px; flex-wrap:wrap;">
+      <button id="loadFromSite" class="btn sm ghost">Load current live board</button>
+      <button id="loadFromFileBtn" class="btn sm ghost">Import a JSON file</button>
+      <input type="file" id="fileInput" accept="application/json" hidden>
+      <button id="exportBtn" class="btn sm primary">Export tournaments.json</button>
+      <button id="clearAll" class="btn sm ghost" style="margin-left:auto;">Clear draft</button>
+    </div>
+
+    <div class="grid-2" id="editor" style="align-items:start;">
+      <div class="panel">
+        <h3 id="formTitle" style="font-size:20px;">Add a tournament</h3>
+        <form id="tForm">
+          <input type="hidden" name="id">
+          <div class="field">
+            <label>Tournament name</label>
+            <input name="name" required placeholder="Monthly Community Scrim — Season 2">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Game</label>
+              <input name="game" value="Honor of Kings">
+            </div>
+            <div class="field">
+              <label>Status</label>
+              <select name="status">
+                <option value="upcoming">Upcoming</option>
+                <option value="ongoing">Ongoing / Live</option>
+                <option value="finished">Finished</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Start date</label>
+              <input type="date" name="startDate">
+            </div>
+            <div class="field">
+              <label>End date</label>
+              <input type="date" name="endDate">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Format</label>
+              <input name="format" placeholder="Single Elimination">
+            </div>
+            <div class="field">
+              <label>Teams / players</label>
+              <input name="teams" placeholder="16 teams">
+            </div>
+          </div>
+          <div class="field">
+            <label>Prize pool</label>
+            <input name="prizePool" placeholder="In-game tokens + ৳5,000 bonus">
+          </div>
+          <div class="field">
+            <label>Description</label>
+            <textarea name="description" placeholder="Short public description of the tournament."></textarea>
+          </div>
+          <div class="field">
+            <label>Results summary (once finished)</label>
+            <input name="resultsSummary" placeholder="Winner: Team Rotten — Runner-up: Team Nova">
+          </div>
+          <div class="field">
+            <label>Registration / details link (optional)</label>
+            <input name="registrationLink" placeholder="https://...">
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button type="submit" id="saveBtn" class="btn primary">Add to draft</button>
+            <button type="button" id="cancelEdit" class="btn ghost" style="display:none;">Cancel edit</button>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <h3 style="font-size:18px; margin-bottom:16px;">Working draft <span class="hint">(saved in this browser)</span></h3>
+        <div id="adminList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-bottom" style="border-top:none; margin-top:0;">
+      <span>© <span data-year></span> The Rotten Republic.</span>
+      <a href="tournaments.html" style="color:var(--steel);">← Back to public board</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/tournament-admin.js"></script>
+</body>
+</html>

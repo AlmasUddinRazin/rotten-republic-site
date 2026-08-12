@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Generator — The Rotten Republic</title>
+<link rel="icon" href="assets/img/logo.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="The Rotten Republic crest">
+      <span class="brand-text"><b>The Rotten Republic</b><span>Community Esports HQ</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="invoice.html" class="active">Invoices</a>
+    </div>
+  </nav>
+</header>
+
+<section class="section" style="padding-top:56px; border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Official Paper</div>
+      <h2>Invoice Generator</h2>
+      <p>Fill this in once, download as PDF or JPG, done. Nothing here is saved anywhere except this browser — no server, no account.</p>
+    </div>
+
+    <div class="invoice-layout">
+
+      <!-- ===================== LEFT: EDITOR ===================== -->
+      <div class="invoice-editor no-print">
+
+        <div class="panel sm" style="margin-bottom:20px;">
+          <button type="button" id="orgToggle" class="btn sm ghost" style="width:100%;">Organization settings ▾</button>
+          <div id="orgPanel" class="org-panel">
+            <form id="orgForm">
+              <div class="field">
+                <label>Org name</label>
+                <input name="name">
+              </div>
+              <div class="field-row">
+                <div class="field"><label>Email</label><input name="email"></div>
+                <div class="field"><label>Phone</label><input name="phone"></div>
+              </div>
+              <div class="field"><label>Address</label><input name="address"></div>
+              <div class="field"><label>Logo URL</label><input name="logo"></div>
+              <p class="hint">Changes here are saved automatically in this browser and reused on every future invoice.</p>
+            </form>
+          </div>
+        </div>
+
+        <div class="panel sm" style="margin-bottom:20px;">
+          <div class="field-row">
+            <div class="field">
+              <label>Invoice type</label>
+              <select id="invoiceType">
+                <option>Prize Payout</option>
+                <option>Entry Fee</option>
+                <option>Purchase</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Currency</label>
+              <select id="currency">
+                <option value="BDT">৳ BDT</option>
+                <option value="USD">$ USD</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Invoice number</label>
+              <input id="invNumber">
+            </div>
+            <div class="field">
+              <label>Invoice date &amp; time</label>
+              <input id="invDate" type="datetime-local">
+            </div>
+          </div>
+          <div class="field">
+            <label>Due date <span class="hint" style="display:inline;">(optional)</span></label>
+            <input id="dueDate" type="date">
+          </div>
+        </div>
+
+        <div class="panel sm" style="margin-bottom:20px;">
+          <label>Billed to</label>
+          <form id="recipientForm">
+            <div class="radio-group" style="margin-bottom:16px;">
+              <label class="radio-opt selected">
+                <input type="radio" name="billedType" value="Player" checked> Player
+              </label>
+              <label class="radio-opt">
+                <input type="radio" name="billedType" value="Team"> Team
+              </label>
+            </div>
+
+            <div class="field">
+              <label id="recipientLabel">Player name (in-game / real)</label>
+              <input id="recipientName" placeholder="e.g. Rotten_Vex">
+            </div>
+            <div class="field" id="managerField" style="display:none;">
+              <label>Manager / representative name</label>
+              <input id="managerName" placeholder="Team manager or POC">
+            </div>
+            <div class="field-row three">
+              <div class="field"><label>Email</label><input id="recEmail"></div>
+              <div class="field"><label>Phone</label><input id="recPhone"></div>
+              <div class="field"><label>Discord</label><input id="recDiscord" placeholder="user#0000"></div>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel sm" style="margin-bottom:20px;">
+          <label style="margin-bottom:12px;">Items</label>
+          <table class="items">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="itemsBody"></tbody>
+          </table>
+          <button type="button" id="addRow" class="btn sm ghost" style="margin-top:10px;">+ Add row</button>
+        </div>
+
+        <div class="panel sm" style="margin-bottom:20px;">
+          <div class="field-row">
+            <div class="field">
+              <label>Payment method</label>
+              <input id="payMethod" placeholder="bKash / Nagad / Bank Transfer">
+            </div>
+            <div class="field">
+              <label>Payment details</label>
+              <input id="payDetails" placeholder="01886-071978 (Personal)">
+            </div>
+          </div>
+          <div class="field">
+            <label>Terms &amp; conditions</label>
+            <textarea id="terms" rows="5"></textarea>
+          </div>
+        </div>
+
+        <div class="panel sm" style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button type="button" id="downloadPdfBtn" class="btn primary">Download PDF</button>
+          <button type="button" id="downloadJpgBtn" class="btn ghost">Download JPG</button>
+          <button type="button" id="printBtn" class="btn ghost">Print</button>
+          <button type="button" id="newInvoiceBtn" class="btn ghost" style="margin-left:auto;">New invoice</button>
+        </div>
+      </div>
+
+      <!-- ===================== RIGHT: LIVE PREVIEW ===================== -->
+      <div class="invoice-preview-col">
+        <div id="invoicePaper" class="invoice-paper">
+          <div class="ip-head">
+            <img id="previewLogo" src="assets/img/logo.png" alt="Logo">
+            <div class="ip-org">
+              <h3 id="previewOrgName">The Rotten Republic</h3>
+              <p id="previewOrgContact" class="mono"></p>
+            </div>
+            <div class="ip-meta">
+              <div class="meta-line"><span>Invoice</span><b id="previewNumber"></b></div>
+              <div class="meta-line"><span>Type</span><b id="previewType"></b></div>
+              <div class="meta-line"><span>Date</span><b id="previewDate"></b></div>
+              <div class="meta-line"><span>Due</span><b id="previewDue"></b></div>
+            </div>
+          </div>
+
+          <div class="ip-billto">
+            <span class="ip-label"><span id="previewBilledLabel">Player</span> billed to</span>
+            <h4 id="previewRecipient">—</h4>
+            <p id="previewManagerLine" style="display:none;">Represented by <b id="previewManager"></b></p>
+            <p id="previewRecContact" class="mono"></p>
+          </div>
+
+          <table class="ip-items">
+            <thead>
+              <tr><th>Description</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+            </thead>
+            <tbody id="itemsPreviewBody"></tbody>
+          </table>
+
+          <div class="ip-total">
+            <span>Total</span>
+            <b id="previewTotal">—</b>
+          </div>
+
+          <div class="pay-block">
+            <span class="ip-label">Payment</span>
+            <p id="previewPayment"></p>
+          </div>
+
+          <div class="ip-terms">
+            <span class="ip-label">Terms &amp; conditions</span>
+            <ul id="previewTerms"></ul>
+          </div>
+
+          <div class="ip-foot">
+            <span>Issued by The Rotten Republic — Dhaka, Bangladesh</span>
+          </div>
+        </div>
+
+        <div class="panel sm no-print" style="margin-top:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <label style="margin:0;">Invoice history</label>
+            <button type="button" id="clearHistory" class="btn sm ghost">Clear</button>
+          </div>
+          <div id="historyList"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer no-print">
+  <div class="wrap">
+    <div class="foot-bottom" style="border-top:none; margin-top:0;">
+      <span>© <span data-year></span> The Rotten Republic.</span>
+      <a href="tournaments.html" style="color:var(--steel);">← Back to tournaments</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/invoice.js"></script>
+</body>
+</html>

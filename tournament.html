@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tournaments — The Rotten Republic</title>
+<link rel="icon" href="assets/img/logo.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="The Rotten Republic crest">
+      <span class="brand-text"><b>The Rotten Republic</b><span>Community Esports HQ</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="tournaments.html" class="active">Tournaments</a>
+      <a href="invoice.html">Invoices</a>
+    </div>
+  </nav>
+</header>
+
+<section class="section" style="padding-top:56px; border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Live Board</div>
+      <h2>Tournaments</h2>
+      <p>Every Rotten Republic tournament — live, upcoming, or wrapped up. This board is updated directly, without touching a line of code, whenever a tournament starts, changes, or finishes.</p>
+    </div>
+
+    <div class="tourney-toolbar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="ongoing">Live</button>
+      <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+      <button class="filter-btn" data-filter="finished">Finished</button>
+    </div>
+
+    <div id="board">
+      <div class="empty-state"><h3>Loading board…</h3></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-bottom:none; padding-top:0;">
+  <div class="wrap">
+    <div class="panel sm" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+      <div>
+        <div class="eyebrow" style="margin-bottom:6px;">Managing this board</div>
+        <p style="margin:0; font-size:13.5px;">Tournaments are managed from a separate editor page — add, update, or close out an event there, then export the updated data file.</p>
+      </div>
+      <a href="tournament-admin.html" class="btn sm">Open Editor →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <a href="index.html" class="brand">
+        <img src="assets/img/logo.png" alt="The Rotten Republic crest" style="width:32px;height:32px;">
+        <span class="brand-text"><b>The Rotten Republic</b><span>Community Esports HQ</span></span>
+      </a>
+      <div class="foot-contact">
+        therottenrepublicofficial@gmail.com<br>
+        +880 1886‑071978<br>
+        Dhaka, Bangladesh
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span data-year></span> The Rotten Republic.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/tournaments.js"></script>
+</body>
+</html>
